@@ -32,7 +32,7 @@ function App() {
   }
 
 
-  // get all todos
+  // read all todos
   const getTodos = async () => {
     await getDocs(collectionRef).then((todo) => {
       let todoData = todo.docs.map((doc) => (
@@ -54,6 +54,12 @@ function App() {
   }, [])
 
 
+// delete todo
+  const deleteTodo = async (id) => {
+    await deleteDoc(doc(collectionRef, id))
+    const newTodos = todos.filter((todo) => todo.id !== id)
+    setTodos(newTodos)
+  }
 
   return (
     <>
@@ -72,7 +78,7 @@ function App() {
       </form>
       <ul>
       {todos.map((todo, index) => (
-        <Todo key={index} todo={todo} />
+        <Todo key={index} todo={todo} deleteTodo={deleteTodo}/>
       ))}
       </ul>
       <p>You have {todos.length} todos</p>

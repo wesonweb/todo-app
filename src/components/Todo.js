@@ -1,7 +1,7 @@
 import './Todo.css'
 import { GoTrashcan } from 'react-icons/go'
 
-function Todo({ todo }) {
+function Todo({ todo, deleteTodo }) {
   return (
   <li>
     <div>
@@ -12,7 +12,9 @@ function Todo({ todo }) {
       <p
       >{todo.text}</p>
     </div>
-    <button>
+    <button
+      onClick={() => deleteTodo(todo.id)}
+    >
       <GoTrashcan
         size={24}
       />
