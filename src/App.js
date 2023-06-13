@@ -11,7 +11,7 @@ function App() {
   const [todos, setTodos] = useState([])
   const [input, setInput] = useState('')
 
-  // add a todo
+  // create a todo
   const addTodo = async (event) => {
     event.preventDefault()
     if(input === '') {
@@ -30,7 +30,6 @@ function App() {
     }])
     setInput('')
   }
-
 
   // read all todos
   const getTodos = async () => {
@@ -52,6 +51,24 @@ function App() {
   useEffect(() => {
     getTodos()
   }, [])
+
+  // update todo
+  const toggleComplete = async (todo) => {
+    await updateDoc(doc(collectionRef, todo.id), {
+      completed: !todo.completed
+      })
+    const newTodos = todos.map((item) => {
+      if(item.id === todo.id) {
+        return {
+          ...item,
+          completed: !item.completed
+        }
+      }
+      return item
+    }
+    )
+    setTodos(newTodos)
+  }
 
 
 // delete todo
@@ -78,7 +95,7 @@ function App() {
       </form>
       <ul>
       {todos.map((todo, index) => (
-        <Todo key={index} todo={todo} deleteTodo={deleteTodo}/>
+        <Todo key={index} todo={todo} deleteTodo={deleteTodo} toggleComplete={toggleComplete}/>
       ))}
       </ul>
       <p>You have {todos.length} todos</p>
