@@ -79,27 +79,37 @@ function App() {
   }
 
   return (
-    <>
-      <h1>Todo app</h1>
-      <form onSubmit={addTodo}>
+    <div className="md: container mx-auto px-4">
+      <h1 className="text-3xl text-center mt-5">Todo app</h1>
+      <form
+        className="flex content-center w-100 max-w-3xl mt-4 mx-auto"
+        onSubmit={addTodo}>
         <input
+          className="border border-gray-400 rounded p-2 w-full"
           type="text"
           placeholder="Add a new todo"
           value={input}
+          autoFocus
           onChange={(event) => setInput(event.target.value)}
         />
         <button
+          className="flex rounded bg-green-700 text-white p-2 px-4 ml-1 hover:bg-green-600 items-center"
           type="submit">
-          Add <AiOutlinePlus size={24} />
+          Add <AiOutlinePlus size={16} className="ms-2"/>
         </button>
       </form>
       <ul>
       {todos.map((todo, index) => (
-        <Todo key={index} todo={todo} deleteTodo={deleteTodo} toggleComplete={toggleComplete}/>
+        <Todo
+          key={index}
+          todo={todo}
+          deleteTodo={deleteTodo}
+          toggleComplete={toggleComplete}
+        />
       ))}
       </ul>
-      <p>You have {todos.length} todos</p>
-    </>
+      <p className="text-xl mt-3 text-center">You have {todos.length} {todos.length === 1 ? "todo" : "todos" } </p>
+    </div>
   );
 }
 
