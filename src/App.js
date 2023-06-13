@@ -1,20 +1,69 @@
 import './App.css';
-import { useState } from 'react';
+import { db } from './services/firebase.config'
+import { useState, useEffect } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
+import { collection, addDoc, getDocs, deleteDoc, updateDoc, doc, serverTimestamp } from 'firebase/firestore'
 import Todo from './components/Todo';
 
 function App() {
-  const [todos, setTodos] = useState(['Todo 1', 'Todo 2', 'Todo 3'])
+  const collectionRef = collection(db, 'todos')
+
+  const [todos, setTodos] = useState([])
+  const [input, setInput] = useState('')
+
+  // add a todo
+  const addTodo = async (event) => {
+    event.preventDefault()
+    if(input === '') {
+      alert('Please enter a todo')
+      return
+    }
+    const docRef = await addDoc(collectionRef, {
+      text: input,
+      completed: false,
+      timestamp: serverTimestamp()
+    })
+    setTodos([...todos, {
+      id: docRef.id,
+      text: input,
+      completed: false
+    }])
+    setInput('')
+  }
 
 
-  const handleSubmit = (event) => {}
+  // get all todos
+  const getTodos = async () => {
+    await getDocs(collectionRef).then((todo) => {
+      let todoData = todo.docs.map((doc) => (
+        {
+          id: doc.id,
+          ...doc.data()
+        }
+      ))
+      console.log(todoData);
+      setTodos(todoData)
+    }).catch((error) => {
+        console.log(error.message);
+      }
+    )
+  }
+
+  useEffect(() => {
+    getTodos()
+  }, [])
+
+
+
   return (
     <>
       <h1>Todo app</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={addTodo}>
         <input
           type="text"
           placeholder="Add a new todo"
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
         />
         <button
           type="submit">

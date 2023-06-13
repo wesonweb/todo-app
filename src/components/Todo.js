@@ -5,8 +5,12 @@ function Todo({ todo }) {
   return (
   <li>
     <div>
-      <input type="checkbox" />
-      <p>{todo}</p>
+      <input
+        type="checkbox"
+
+      />
+      <p
+      >{todo.text}</p>
     </div>
     <button>
       <GoTrashcan
