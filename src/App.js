@@ -1,4 +1,3 @@
-import './App.css';
 import { db } from './services/firebase.config'
 import { useState, useEffect } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
