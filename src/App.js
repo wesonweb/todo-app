@@ -108,7 +108,8 @@ function App() {
         />
       ))}
       </ul>
-      <p className="text-xl mt-3 text-center">You have {todos.length} {todos.length === 1 ? "todo" : "todos" } </p>
+      {console.log(todos)}
+      <p className="text-xl mt-3 text-center">{todos.length > 0 ? `You have ${todos.length} ${todos.length === 1 ? "todo" : "todos" }` : "" }</p>
     </div>
   );
 }
