@@ -30,8 +30,8 @@ function App() {
     setInput('')
   }
 
-  // read all todos
-  const getTodos = async () => {
+  useEffect(() => {
+    const getTodos = async () => {
     await getDocs(collectionRef).then((todo) => {
       let todoData = todo.docs.map((doc) => (
         {
@@ -39,16 +39,14 @@ function App() {
           ...doc.data()
         }
       ))
-      console.log(todoData);
       setTodos(todoData)
     }).catch((error) => {
         console.log(error.message);
       }
     )
   }
-
-  useEffect(() => {
     getTodos()
+    // eslint-disable-next-line
   }, [])
 
   // update todo
