@@ -67,13 +67,16 @@ function App() {
     setTodos(newTodos)
   }
 
-
 // delete todo
   const deleteTodo = async (id) => {
     await deleteDoc(doc(collectionRef, id))
     const newTodos = todos.filter((todo) => todo.id !== id)
     setTodos(newTodos)
   }
+
+  const todosLength = todos.filter((todo) => todo.completed !== true).length
+  console.log(`there are ${todosLength} todos not completed`)
+
 
   return (
     <div className="h-screen w-full bg-ocean-500 flex justify-center items-center">
@@ -112,7 +115,9 @@ function App() {
             ))}
             </ul>
             {console.log(todos)}
-            <p className="text-xl text-gray-700 my-6 text-center">{todos.length > 0 ? `You have ${todos.length} ${todos.length === 1 ? "todo" : "todos" }` : "" }</p>
+            <p className="text-xl text-gray-700 my-6 text-center">
+            {todosLength > 0 ? `You have ${todosLength} ${todosLength === 1 ? "todo" : "todos" }` : "" }
+            </p>
           </div>
         </div>
     </div>
