@@ -5,7 +5,7 @@ describe ('App component', () => {
   test('App component renders', () => {
     render(<App />)
 
-    expect(screen.getByText('Todo App', {exact: false})).toBeInTheDocument()
+    expect(screen.getByText('What can you cross off your list today?', {exact: false})).toBeInTheDocument()
   })
 
   test('Check button renders', () => {
