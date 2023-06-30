@@ -1,6 +1,5 @@
 import { db } from './services/firebase.config'
 import { useState, useEffect } from 'react';
-import { AiOutlinePlus } from 'react-icons/ai';
 import { MdAdd } from 'react-icons/md';
 import { collection, addDoc, getDocs, deleteDoc, updateDoc, doc, serverTimestamp } from 'firebase/firestore'
 import Todo from './components/Todo';
