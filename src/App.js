@@ -75,7 +75,6 @@ function App() {
   }
 
   const todosLength = todos.filter((todo) => todo.completed !== true).length
-  console.log(`there are ${todosLength} todos not completed`)
 
 
   return (
@@ -98,7 +97,7 @@ function App() {
                   onChange={(event) => setInput(event.target.value)}
                 />
                 <button
-                  className="flex rounded bg-green-700 text-white p-2 px-4 ml-1 hover:bg-green-600 items-center"
+                  className="flex rounded bg-grass-800 text-white p-2 px-4 ml-1 hover:bg-green-600 items-center"
                   type="submit">
                   Add <MdAdd size={24} className="ms-1"/>
                 </button>
@@ -114,7 +113,6 @@ function App() {
               />
             ))}
             </ul>
-            {console.log(todos)}
             <p className="text-xl text-gray-700 my-6 text-center">
             {todosLength > 0 ? `You have ${todosLength} ${todosLength === 1 ? "todo" : "todos" }` : "" }
             </p>
