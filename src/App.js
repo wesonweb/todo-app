@@ -74,52 +74,57 @@ function App() {
     setTodos(newTodos)
   }
 
+//   const handleTodoEdit = (todo) => {
+//     console.log('edit todo: ', todo)
+//     }
+
   const todosLength = todos.filter((todo) => todo.completed !== true).length
 
 
   return (
     <div className="h-screen w-full bg-ocean-500 flex justify-center items-center">
-      <div className="max-w-2xl px-4 bg-white rounded shadow-lg">
-          <div className="p-4">
-            <h1 className="text-3xl text-center pt-5">What can you cross off your list today?</h1>
-            <form
-              className="w-100 max-w-3xl my-8 mx-auto"
-              onSubmit={addTodo}>
-              <label htmlFor="todo-input" className="block mb-1 text-gray-700">Add a new todo</label>
-              <div className="flex content-center">
-                <input
-                  className="border border-gray-400 rounded p-2 w-full"
-                  name="todo-input"
-                  type="text"
-                  placeholder="eg water the plants..."
-                  value={input}
-                  autoFocus
-                  onChange={(event) => setInput(event.target.value)}
+        <div className="max-w-2xl px-4 bg-white rounded shadow-lg">
+            <div className="p-4">
+                <h1 className="text-3xl text-center pt-5">What can you cross off your list today?</h1>
+                <form
+                className="w-100 max-w-3xl my-8 mx-auto"
+                onSubmit={addTodo}>
+                <label htmlFor="todo-input" className="block mb-1 text-gray-700">Add a new todo</label>
+                <div className="flex content-center">
+                    <input
+                    className="border border-gray-400 rounded p-2 w-full"
+                    name="todo-input"
+                    type="text"
+                    placeholder="eg water the plants..."
+                    value={input}
+                    autoFocus
+                    onChange={(event) => setInput(event.target.value)}
+                    />
+                    <button
+                    className="flex rounded bg-grass-800 text-white p-2 px-4 ml-1 hover:bg-green-600 items-center"
+                    type="submit">
+                    Add <MdAdd size={24} className="ms-1"/>
+                    </button>
+                </div>
+                </form>
+                <ul>
+                {todos.map((todo, index) => (
+                <Todo
+                    key={index}
+                    todo={todo}
+                    deleteTodo={deleteTodo}
+                    // handleTodoEdit={handleTodoEdit}
+                    toggleComplete={toggleComplete}
                 />
-                <button
-                  className="flex rounded bg-grass-800 text-white p-2 px-4 ml-1 hover:bg-green-600 items-center"
-                  type="submit">
-                  Add <MdAdd size={24} className="ms-1"/>
-                </button>
-              </div>
-            </form>
-            <ul>
-            {todos.map((todo, index) => (
-              <Todo
-                key={index}
-                todo={todo}
-                deleteTodo={deleteTodo}
-                toggleComplete={toggleComplete}
-              />
-            ))}
-            </ul>
-            <p className="text-xl text-gray-700 my-6 text-center">
-            {todosLength > 0 ? `You have ${todosLength} ${todosLength === 1 ? "todo" : "todos" }` : "" }
-            </p>
-          </div>
+                ))}
+                </ul>
+                <p className="text-xl text-gray-700 my-6 text-center">
+                {todosLength > 0 ? `You have ${todosLength} ${todosLength === 1 ? "todo" : "todos" }` : "" }
+                </p>
+            </div>
         </div>
     </div>
-  );
+    );
 }
 
 export default App;
